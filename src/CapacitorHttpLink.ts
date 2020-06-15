@@ -9,8 +9,10 @@ import {
   UriFunction as _UriFunction,
 } from 'apollo-link-http-common';
 import { DefinitionNode } from 'graphql';
-import { Http } from '@capacitor/http';
-import { registerWebPlugin } from '@capacitor/core';
+import '@capacitor-community/http';
+import { Plugins } from '@capacitor/core';
+
+const { Http } = Plugins;
 
 export type ClientAwarenessHeaders = {
   [key: string]: string;
@@ -28,26 +30,14 @@ export interface Options extends HttpOptions {
 }
 
 export const createHttpLink = (linkOptions: Options = {}) => {
-  registerWebPlugin(Http as any);
+  // registerWebPlugin(Http as any);
 
   let {
     uri = '/graphql',
-    // use default global fetch if nothing passed in
-    fetch: fetcher,
     includeExtensions,
     useGETForQueries,
     ...requestOptions
   } = linkOptions;
-
-  // dev warnings to ensure fetch is present
-  // checkFetcher(fetcher);
-
-  //fetcher is set here rather than the destructuring to ensure fetch is
-  //declared before referencing it. Reference in the destructuring would cause
-  //a ReferenceError
-  // if (!fetcher) {
-  //   fetcher = fetch;
-  // }
 
   const linkConfig = {
     http: { includeExtensions },
@@ -61,12 +51,6 @@ export const createHttpLink = (linkOptions: Options = {}) => {
 
     const context = operation.getContext();
 
-    // `apollographql-client-*` headers are automatically set if a
-    // `clientAwareness` object is found in the context. These headers are
-    // set first, followed by the rest of the headers pulled from
-    // `context.headers`. If desired, `apollographql-client-*` headers set by
-    // the `clientAwareness` object can be overridden by
-    // `apollographql-client-*` headers set in `context.headers`.
     const clientAwarenessHeaders: ClientAwarenessHeaders = {};
     if (context.clientAwareness) {
       const { name, version } = context.clientAwareness;
@@ -87,7 +71,6 @@ export const createHttpLink = (linkOptions: Options = {}) => {
       headers: contextHeaders,
     };
 
-    //uses fallback, link, and then context to build options
     const { options, body } = selectHttpOptionsAndBody(
       operation,
       fallbackHttpConfig,
@@ -95,7 +78,6 @@ export const createHttpLink = (linkOptions: Options = {}) => {
       contextConfig
     );
 
-    // If requested, set method to GET if there are no mutations.
     const definitionIsMutation = (d: DefinitionNode) => {
       return d.kind === 'OperationDefinition' && d.operation === 'mutation';
     };

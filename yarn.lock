@@ -815,20 +815,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@capacitor/core@latest":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.1.2.tgz#d710b2a873f8c9ba1184a67f6c27bdb2a3a0a4af"
-  integrity sha512-oi+n23h9cJ/yaeMIlrnoeCV5p7pv2XWdT+cXzwh9j72LV+Y/oSGcNgFWGEAR/B1UVlv6LnLLQSs9CUXhNlh+Nw==
-  dependencies:
-    tslib "^1.9.0"
-
-"@capacitor/http@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@capacitor/http/-/http-0.0.2.tgz#a5a3f29d1682662c62736aa953823b9a178e7073"
-  integrity sha512-3UPqYOmVkAQjCWWowSDGPnBkXY7znbPE7lNs8nhwTmE2E5fXTvjHM8PV15zOyn+nenY7zEu9Air49fGjrX+Tjg==
-  dependencies:
-    "@capacitor/core" latest
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
