@@ -17,8 +17,6 @@ const { Http } = Plugins;
 export type ClientAwarenessHeaders = {
   [key: string]: string;
 };
-
-//TODO Would much rather be able to export directly
 export interface UriFunction extends _UriFunction {}
 export interface Options extends HttpOptions {
   /**
@@ -30,7 +28,6 @@ export interface Options extends HttpOptions {
 }
 
 export const createHttpLink = (linkOptions: Options = {}) => {
-  // registerWebPlugin(Http as any);
 
   let {
     uri = '/graphql',
