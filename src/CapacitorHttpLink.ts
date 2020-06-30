@@ -28,7 +28,6 @@ export interface Options extends HttpOptions {
 }
 
 export const createHttpLink = (linkOptions: Options = {}) => {
-
   let {
     uri = '/graphql',
     includeExtensions,
